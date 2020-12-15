@@ -89,7 +89,7 @@ const StatusBarRight = styled.div`
   border: ${props => props.barWidth} solid ${props => props.barColor};
   border-radius: 50%;
 
-  -webkit-clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
+  clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
   transform: rotate(${props => clamp(props.percent * 2, 0, 1) * 180}deg);
 `;
 
@@ -103,7 +103,7 @@ const StatusBarLeft = styled.div`
   border: ${props => props.barWidth} solid ${props => props.barColor};
   border-radius: 50%;
 
-  -webkit-clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
+  clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
   transform: rotate(${props => clamp((props.percent - 0.5) * 2, 0, 1) * 180}deg) scaleX(-1);
 `;
 
