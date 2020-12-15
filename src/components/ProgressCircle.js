@@ -6,17 +6,44 @@ import { clamp } from '../utils';
 
 import { grey, brightBlue } from '../styles/colors';
 
-// TODO: allow customization of size, color, etc.
-// we can support styled-components but only one class
+const DEFAULT_SIZE = '64px';
+const DEFAULT_BAR_WIDTH = '10px';
 
-const ProgressCircle = ({ percent = 0, children = [] }) => {
+const DEFAULT_BAR_COLOR = brightBlue;
+const DEFAULT_BAR_BG_COLOR = grey;
+
+const ProgressCircle = ({
+  percent = 0,
+  size = DEFAULT_SIZE,
+  barWidth = DEFAULT_BAR_WIDTH,
+  barColor = DEFAULT_BAR_COLOR,
+  barBGColor = DEFAULT_BAR_BG_COLOR,
+  onClick = () => {},
+  children = []
+}) => {
   return (
-    <StatusBorder>
+    <StatusBorder
+      size={size}
+      barWidth={barWidth}
+      barBGColor={barBGColor}
+      //TODO: compute the percent clicked based on polar coordinates and return as part of the event
+      onClick={onClick}
+    >
       <StatusBarRightClip>
-        <StatusBarRight percent={percent} />
+        <StatusBarRight
+          percent={percent}
+          barColor={barColor}
+          size={size}
+          barWidth={barWidth}
+        />
       </StatusBarRightClip>
       <StatusBarLeftClip>
-        <StatusBarLeft percent={percent} />
+        <StatusBarLeft
+          percent={percent}
+          barColor={barColor}
+          size={size}
+          barWidth={barWidth}
+        />
       </StatusBarLeftClip>
       {children}
     </StatusBorder>
@@ -25,10 +52,10 @@ const ProgressCircle = ({ percent = 0, children = [] }) => {
 
 const StatusBorder = styled.div`
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: ${props => props.size};
+  height: ${props => props.size};
 
-  border: 10px solid ${grey};
+  border: ${props => props.barWidth} solid ${props => props.barBGColor};
   border-radius: 50%;
 
   margin: auto;
@@ -39,7 +66,7 @@ const StatusBarRightClip = styled.div`
   width: 100%;
   height: 100%;
 
-  clip-path: inset(-20% -20% -20% 50%);
+  clip-path: inset(-${props => props.barWidth} -${props => props.barWidth} -${props => props.barWidth} 50%);
 `;
 
 const StatusBarLeftClip = styled.div`
@@ -47,20 +74,20 @@ const StatusBarLeftClip = styled.div`
   width: 100%;
   height: 100%;
 
-  clip-path: inset(-20% 50% -20% -20%);
+  clip-path: inset(-${props => props.barWidth} 50% -${props => props.barWidth} -${props => props.barWidth});
 `;
 
 const StatusBarRight = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  top: -10px;
-  left: -10px;
+  top: -${props => props.barWidth};
+  left: -${props => props.barWidth};
 
-  border: 10px solid ${brightBlue};
+  border: ${props => props.barWidth} solid ${props => props.barColor};
   border-radius: 50%;
 
-  clip: rect(0, 42px, 84px, 0);
+  -webkit-clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
   transform: rotate(${props => clamp(props.percent * 2, 0, 1) * 180}deg);
 `;
 
@@ -68,13 +95,13 @@ const StatusBarLeft = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  top: -10px;
-  left: -10px;
+  top: -${props => props.barWidth};
+  left: -${props => props.barWidth};
 
-  border: 10px solid ${brightBlue};
+  border: ${props => props.barWidth} solid ${props => props.barColor};
   border-radius: 50%;
 
-  clip: rect(0px, 42px, 84px, 0px);
+  -webkit-clip-path: polygon(0 0, 50% 0, 50% calc(${props => props.size} + ${props => props.barWidth} * 2), 0 calc(${props => props.size} + ${props => props.barWidth} * 2));
   transform: rotate(${props => clamp((props.percent - 0.5) * 2, 0, 1) * 180}deg) scaleX(-1);
 `;
 
@@ -83,6 +110,27 @@ ProgressCircle.propTypes = {
     a floating point number between 0 and 1
   */
   percent: PropTypes.number,
+
+  /**
+    overall width and height string including CSS units.
+    This solution only works with a square aspect
+  */
+  size: PropTypes.string,
+
+  /**
+    bar width string including CSS units
+  */
+  barWidth: PropTypes.string,
+
+  /**
+    bar color as a hex string
+  */
+  barColor: PropTypes.string,
+
+  /**
+    Background bar color as a hex string
+  */
+  barBGColor: PropTypes.string,
 };
 ProgressCircle.displayName = 'ProgressCircle';
 

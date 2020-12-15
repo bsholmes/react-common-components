@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 // only render children if media query evaluates to true
 const MediaRender = ({ query = '', children = [] }) => {
