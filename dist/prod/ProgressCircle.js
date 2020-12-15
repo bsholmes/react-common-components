@@ -13,6 +13,88 @@ function _taggedTemplateLiteral(strings, raw) {
   }));
 }
 
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+
+function emptyFunction() {}
+function emptyFunctionWithReset() {}
+emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+var factoryWithThrowingShims = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret_1) {
+      // It is still safe when called from React.
+      return;
+    }
+    var err = new Error(
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+    err.name = 'Invariant Violation';
+    throw err;
+  }  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  }  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    elementType: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim,
+
+    checkPropTypes: emptyFunctionWithReset,
+    resetWarningCache: emptyFunction
+  };
+
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+var propTypes = createCommonjsModule(function (module) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+{
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = factoryWithThrowingShims();
+}
+});
+
 var clamp = function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 };
@@ -21,7 +103,7 @@ var grey = '#DDDDDD';
 var brightBlue = '#2170EF';
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -10px;\n  left: -10px;\n\n  border: 10px solid ", ";\n  border-radius: 50%;\n\n  clip: rect(0px, 42px, 84px, 0px);\n  transform: rotate(", "deg) scaleX(-1);\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -", ";\n  left: -", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  clip: rect(0px, 42px, 84px, 0px);\n  transform: rotate(", "deg) scaleX(-1);\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -31,7 +113,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -10px;\n  left: -10px;\n\n  border: 10px solid ", ";\n  border-radius: 50%;\n\n  clip: rect(0, 42px, 84px, 0);\n  transform: rotate(", "deg);\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -", ";\n  left: -", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  clip: rect(0, 42px, 84px, 0);\n  transform: rotate(", "deg);\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -61,7 +143,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  width: 64px;\n  height: 64px;\n\n  border: 10px solid ", ";\n  border-radius: 50%;\n\n  margin: auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  width: ", ";\n  height: ", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  margin: auto;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -69,27 +151,107 @@ function _templateObject() {
 
   return data;
 }
+var DEFAULT_WIDTH = '64px';
+var DEFAULT_HEIGHT = '64px';
+var DEFAULT_BAR_WIDTH = '10px';
+var DEFAULT_BAR_COLOR = brightBlue;
+var DEFAULT_BAR_BG_COLOR = grey;
 
 var ProgressCircle = function ProgressCircle(_ref) {
   var _ref$percent = _ref.percent,
       percent = _ref$percent === void 0 ? 0 : _ref$percent,
+      _ref$width = _ref.width,
+      width = _ref$width === void 0 ? DEFAULT_WIDTH : _ref$width,
+      _ref$height = _ref.height,
+      height = _ref$height === void 0 ? DEFAULT_HEIGHT : _ref$height,
+      _ref$barWidth = _ref.barWidth,
+      barWidth = _ref$barWidth === void 0 ? DEFAULT_BAR_WIDTH : _ref$barWidth,
+      _ref$barColor = _ref.barColor,
+      barColor = _ref$barColor === void 0 ? DEFAULT_BAR_COLOR : _ref$barColor,
+      _ref$barBGColor = _ref.barBGColor,
+      barBGColor = _ref$barBGColor === void 0 ? DEFAULT_BAR_BG_COLOR : _ref$barBGColor,
       _ref$children = _ref.children,
       children = _ref$children === void 0 ? [] : _ref$children;
-  return /*#__PURE__*/React.createElement(StatusBorder, null, /*#__PURE__*/React.createElement(StatusBarRightClip, null, /*#__PURE__*/React.createElement(StatusBarRight, {
-    percent: percent
+  return /*#__PURE__*/React.createElement(StatusBorder, {
+    width: width,
+    height: height,
+    barWidth: barWidth,
+    barBGColor: barBGColor
+  }, /*#__PURE__*/React.createElement(StatusBarRightClip, null, /*#__PURE__*/React.createElement(StatusBarRight, {
+    percent: percent,
+    barColor: barColor,
+    barWidth: barWidth
   })), /*#__PURE__*/React.createElement(StatusBarLeftClip, null, /*#__PURE__*/React.createElement(StatusBarLeft, {
-    percent: percent
+    percent: percent,
+    barColor: barColor,
+    barWidth: barWidth
   })), children);
 };
 
-var StatusBorder = styled.div(_templateObject(), grey);
+var StatusBorder = styled.div(_templateObject(), function (props) {
+  return props.width;
+}, function (props) {
+  return props.height;
+}, function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barBGColor;
+});
 var StatusBarRightClip = styled.div(_templateObject2());
 var StatusBarLeftClip = styled.div(_templateObject3());
-var StatusBarRight = styled.div(_templateObject4(), brightBlue, function (props) {
+var StatusBarRight = styled.div(_templateObject4(), function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barColor;
+}, function (props) {
   return clamp(props.percent * 2, 0, 1) * 180;
 });
-var StatusBarLeft = styled.div(_templateObject5(), brightBlue, function (props) {
+var StatusBarLeft = styled.div(_templateObject5(), function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barWidth;
+}, function (props) {
+  return props.barColor;
+}, function (props) {
   return clamp((props.percent - 0.5) * 2, 0, 1) * 180;
 });
+ProgressCircle.propTypes = {
+  /**
+    a floating point number between 0 and 1
+  */
+  percent: propTypes.number,
+
+  /**
+    overall width string including CSS units
+  */
+  width: propTypes.string,
+
+  /**
+    overall height string including CSS units
+  */
+  height: propTypes.string,
+
+  /**
+    bar width string including CSS units
+  */
+  barWidth: propTypes.string,
+
+  /**
+    bar color as a hex string
+  */
+  barColor: propTypes.string,
+
+  /**
+    Background bar color as a hex string
+  */
+  barBGColor: propTypes.string
+};
+ProgressCircle.displayName = 'ProgressCircle';
 
 export default ProgressCircle;
