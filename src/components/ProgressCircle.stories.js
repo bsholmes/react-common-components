@@ -3,10 +3,10 @@ import { default as ProgressCircleComponent } from "./ProgressCircle";
 
 export default {
   title: 'ProgressCircle',
-  component: (args) => <ProgressCircleComponent {...args} />,
+  component: (args) => <ProgressCircleComponent {...args}><div style={{margin: 'auto', textAlign: 'center'}}>Child content</div></ProgressCircleComponent>,
 };
 
-export const ProgressCircle = (args) => <ProgressCircleComponent {...args} />;
+export const ProgressCircle = (args) => <ProgressCircleComponent {...args}><div style={{margin: 'auto', textAlign: 'center'}}>Child content</div></ProgressCircleComponent>;
 ProgressCircle.args = {
   percent: 0.75,
   size: '64px',
@@ -19,7 +19,7 @@ ProgressCircle.argTypes = {
   percent: {
     control: { type: 'range', min: 0, max: 1, step: 0.01 },
     description: 'A number between 0 and 1 controlling the percent completion of the circle',
-    table: { defaultValue: { summary: 0 } }
+    table: { defaultValue: { summary: 0.75 } }
   },
 
   size: {

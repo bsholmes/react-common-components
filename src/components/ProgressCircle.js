@@ -29,7 +29,7 @@ const ProgressCircle = ({
       //TODO: compute the percent clicked based on polar coordinates and return as part of the event
       onClick={onClick}
     >
-      <StatusBarRightClip>
+      <StatusBarRightClip barWidth={barWidth}>
         <StatusBarRight
           percent={percent}
           barColor={barColor}
@@ -37,7 +37,7 @@ const ProgressCircle = ({
           barWidth={barWidth}
         />
       </StatusBarRightClip>
-      <StatusBarLeftClip>
+      <StatusBarLeftClip barWidth={barWidth}>
         <StatusBarLeft
           percent={percent}
           barColor={barColor}
@@ -51,6 +51,8 @@ const ProgressCircle = ({
 };
 
 const StatusBorder = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
   width: ${props => props.size};
   height: ${props => props.size};
