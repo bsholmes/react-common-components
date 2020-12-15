@@ -60,6 +60,8 @@ const StatusBorder = styled.div`
   border: ${props => props.barWidth} solid ${props => props.barBGColor};
   border-radius: 50%;
 
+  box-sizing: border-box;
+
   margin: auto;
 `;
 
