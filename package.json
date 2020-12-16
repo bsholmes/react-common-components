@@ -46,7 +46,8 @@
   },
   "semistandard": {
     "ignore": [
-      "*.test.js"
+      "*.test.js",
+      "dist/**"
     ]
   },
   "devDependencies": {

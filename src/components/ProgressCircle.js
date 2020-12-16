@@ -26,7 +26,7 @@ const ProgressCircle = ({
       size={size}
       barWidth={barWidth}
       barBGColor={barBGColor}
-      //TODO: compute the percent clicked based on polar coordinates and return as part of the event
+      // TODO: compute the percent clicked based on polar coordinates and return as part of the event
       onClick={onClick}
     >
       <StatusBarRightClip barWidth={barWidth}>
@@ -134,7 +134,7 @@ ProgressCircle.propTypes = {
   /**
     Background bar color as a hex string
   */
-  barBGColor: PropTypes.string,
+  barBGColor: PropTypes.string
 };
 ProgressCircle.displayName = 'ProgressCircle';
 
