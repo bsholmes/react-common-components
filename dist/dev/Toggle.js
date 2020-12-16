@@ -1,6 +1,60 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import reactIs from 'react-is';
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
 
 function _taggedTemplateLiteral(strings, raw) {
   if (!raw) {
@@ -12,6 +66,62 @@ function _taggedTemplateLiteral(strings, raw) {
       value: Object.freeze(raw)
     }
   }));
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function createCommonjsModule(fn, module) {
@@ -807,45 +917,11 @@ var propTypes = createCommonjsModule(function (module) {
 }
 });
 
-var clamp = function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-};
-
-var grey = '#DDDDDD';
 var brightBlue = '#2170EF';
-
-function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -", ";\n  left: -", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  clip-path: polygon(0 0, 50% 0, 50% calc(", " + ", " * 2), 0 calc(", " + ", " * 2));\n  transform: rotate(", "deg) scaleX(-1);\n"]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: -", ";\n  left: -", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  clip-path: polygon(0 0, 50% 0, 50% calc(", " + ", " * 2), 0 calc(", " + ", " * 2));\n  transform: rotate(", "deg);\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n\n  clip-path: inset(-", " 50% -", " -", ");\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
+var disabledGrey = '#A2A2A2';
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n\n  clip-path: inset(-", " -", " -", " 50%);\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 10px;\n  height: 10px;\n\n  border-radius: 50%;\n\n  background-color: white;\n  ", "\n\n  transition: transform 0.5s ease;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -855,7 +931,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  position: relative;\n  width: ", ";\n  height: ", ";\n\n  border: ", " solid ", ";\n  border-radius: 50%;\n\n  box-sizing: border-box;\n\n  margin: auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 20px;\n  height: 10px;\n\n  border-radius: 6px;\n\n  background-color: ", ";\n  border: 1px solid ", ";\n\n  ", "\n\n  transition: all 0.5s ease;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -863,137 +939,47 @@ function _templateObject() {
 
   return data;
 }
-var DEFAULT_SIZE = '64px';
-var DEFAULT_BAR_WIDTH = '10px';
-var DEFAULT_BAR_COLOR = brightBlue;
-var DEFAULT_BAR_BG_COLOR = grey;
 
-var ProgressCircle = function ProgressCircle(_ref) {
-  var _ref$percent = _ref.percent,
-      percent = _ref$percent === void 0 ? 0 : _ref$percent,
-      _ref$size = _ref.size,
-      size = _ref$size === void 0 ? DEFAULT_SIZE : _ref$size,
-      _ref$barWidth = _ref.barWidth,
-      barWidth = _ref$barWidth === void 0 ? DEFAULT_BAR_WIDTH : _ref$barWidth,
-      _ref$barColor = _ref.barColor,
-      barColor = _ref$barColor === void 0 ? DEFAULT_BAR_COLOR : _ref$barColor,
-      _ref$barBGColor = _ref.barBGColor,
-      barBGColor = _ref$barBGColor === void 0 ? DEFAULT_BAR_BG_COLOR : _ref$barBGColor,
-      _ref$onClick = _ref.onClick,
-      onClick = _ref$onClick === void 0 ? function () {} : _ref$onClick,
-      _ref$children = _ref.children,
-      children = _ref$children === void 0 ? [] : _ref$children;
-  return /*#__PURE__*/React.createElement(StatusBorder, {
-    size: size,
-    barWidth: barWidth,
-    barBGColor: barBGColor // TODO: compute the percent clicked based on polar coordinates and return as part of the event
-    ,
-    onClick: onClick
-  }, /*#__PURE__*/React.createElement(StatusBarRightClip, {
-    barWidth: barWidth
-  }, /*#__PURE__*/React.createElement(StatusBarRight, {
-    percent: percent,
-    barColor: barColor,
-    size: size,
-    barWidth: barWidth
-  })), /*#__PURE__*/React.createElement(StatusBarLeftClip, {
-    barWidth: barWidth
-  }, /*#__PURE__*/React.createElement(StatusBarLeft, {
-    percent: percent,
-    barColor: barColor,
-    size: size,
-    barWidth: barWidth
-  })), children);
+var Toggle = function Toggle(_ref) {
+  var _ref$initialValue = _ref.initialValue,
+      initialValue = _ref$initialValue === void 0 ? false : _ref$initialValue,
+      _ref$onToggle = _ref.onToggle,
+      onToggle = _ref$onToggle === void 0 ? function () {} : _ref$onToggle,
+      props = _objectWithoutProperties(_ref, ["initialValue", "onToggle"]);
+
+  var _useState = useState(initialValue),
+      _useState2 = _slicedToArray(_useState, 2),
+      isToggled = _useState2[0],
+      setIsToggled = _useState2[1];
+
+  return /*#__PURE__*/React.createElement(Container, _extends({
+    isToggled: isToggled,
+    onClick: function onClick() {
+      setIsToggled(!isToggled);
+      onToggle(!isToggled);
+    }
+  }, props), /*#__PURE__*/React.createElement(Knob, {
+    isToggled: isToggled
+  }));
 };
 
-var StatusBorder = styled.div(_templateObject(), function (props) {
-  return props.size;
-}, function (props) {
-  return props.size;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barBGColor;
+var Container = styled.div(_templateObject(), disabledGrey, disabledGrey, function (props) {
+  return props.isToggled && "\n    background-color: ".concat(brightBlue, ";\n    border: 1px solid ").concat(brightBlue, ";\n  ");
 });
-var StatusBarRightClip = styled.div(_templateObject2(), function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
+var Knob = styled.div(_templateObject2(), function (props) {
+  return props.isToggled && "\n    transform: translateX(100%);\n  ";
 });
-var StatusBarLeftClip = styled.div(_templateObject3(), function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-});
-var StatusBarRight = styled.div(_templateObject4(), function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barColor;
-}, function (props) {
-  return props.size;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.size;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return clamp(props.percent * 2, 0, 1) * 180;
-});
-var StatusBarLeft = styled.div(_templateObject5(), function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.barColor;
-}, function (props) {
-  return props.size;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return props.size;
-}, function (props) {
-  return props.barWidth;
-}, function (props) {
-  return clamp((props.percent - 0.5) * 2, 0, 1) * 180;
-});
-ProgressCircle.propTypes = {
+Toggle.propTypes = {
   /**
-    a floating point number between 0 and 1
+    True if the Toggle should start activated
   */
-  percent: propTypes.number,
+  initialValue: propTypes["boolean"],
 
   /**
-    overall width and height string including CSS units.
-    This solution only works with a square aspect
+    The callback function for when the component is toggled
   */
-  size: propTypes.string,
-
-  /**
-    bar width string including CSS units
-  */
-  barWidth: propTypes.string,
-
-  /**
-    bar color as a hex string
-  */
-  barColor: propTypes.string,
-
-  /**
-    Background bar color as a hex string
-  */
-  barBGColor: propTypes.string
+  onToggle: propTypes["function"]
 };
-ProgressCircle.displayName = 'ProgressCircle';
+Toggle.displayName = 'Toggle';
 
-export default ProgressCircle;
+export default Toggle;

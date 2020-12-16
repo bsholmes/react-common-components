@@ -1,9 +1,9 @@
-if (process.env.NODE_ENV === "production") {  
+if (process.env.NODE_ENV === 'production') {
   module.exports = [
-    require("./prod/MediaRender.js")
+    require('./prod/MediaRender.js')
   ];
-} else {  
+} else {
   module.exports = [
-    require("./dev/MediaRender.js")
-  ]
+    require('./dev/MediaRender.js')
+  ];
 }
