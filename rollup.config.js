@@ -17,11 +17,13 @@ const plugins = [
   commonjs()
 ];
 
+const external = id => /^react|styled-jsx|styled-components/.test(id);
+
 export default [
   // Media
   {
     input: 'src/media/MediaRender.js',
-    external: id => /^react|styled-jsx|styled-components/.test(id),
+    external,
     output: {
       file: outputFolder + 'MediaRender.js'
     },
@@ -30,7 +32,7 @@ export default [
 
   {
     input: 'src/media/RenderToggle.js',
-    external: id => /^react|styled-jsx|styled-components/.test(id),
+    external,
     output: {
       file: outputFolder + 'RenderToggle.js'
     },
@@ -40,7 +42,7 @@ export default [
   // Rendered components
   {
     input: 'src/components/ProgressCircle.js',
-    external: id => /^react|styled-jsx|styled-components/.test(id),
+    external,
     output: {
       file: outputFolder + 'ProgressCircle.js'
     },
@@ -50,7 +52,7 @@ export default [
   // Input Components
   {
     input: 'src/components/input/Toggle.js',
-    external: id => /^react|styled-jsx|styled-components/.test(id),
+    external,
     output: {
       file: outputFolder + 'Toggle.js'
     },
