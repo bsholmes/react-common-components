@@ -1,12 +1,12 @@
-import React from "react";
-import { default as ProgressCircleComponent } from "./ProgressCircle";
+import React from 'react';
+import ProgressCircleComponent from './ProgressCircle';
 
 export default {
   title: 'ProgressCircle',
-  component: (args) => <ProgressCircleComponent {...args}><div style={{margin: 'auto', textAlign: 'center', overflow: 'hidden'}}>Child content</div></ProgressCircleComponent>,
+  component: (args) => <ProgressCircleComponent {...args}><div style={{ margin: 'auto', textAlign: 'center', overflow: 'hidden' }}>Child content</div></ProgressCircleComponent>
 };
 
-export const ProgressCircle = (args) => <ProgressCircleComponent {...args}><div style={{margin: 'auto', textAlign: 'center', overflow: 'hidden'}}>Child content</div></ProgressCircleComponent>;
+export const ProgressCircle = (args) => <ProgressCircleComponent {...args}><div style={{ margin: 'auto', textAlign: 'center', overflow: 'hidden' }}>Child content</div></ProgressCircleComponent>;
 ProgressCircle.args = {
   percent: 0.75,
   size: '64px',
@@ -55,5 +55,5 @@ ProgressCircle.argTypes = {
     table: {
       category: 'Events'
     }
-  },
+  }
 };
