@@ -12,6 +12,8 @@ const DEFAULT_BAR_WIDTH = '10px';
 const DEFAULT_BAR_COLOR = brightBlue;
 const DEFAULT_BAR_BG_COLOR = grey;
 
+// TODO: we can't ease in CSS, but we could ease the percent with setInterval or something
+
 const ProgressCircle = ({
   percent = 0,
   size = DEFAULT_SIZE,

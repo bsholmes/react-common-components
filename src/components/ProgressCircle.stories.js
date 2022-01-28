@@ -39,7 +39,7 @@ ProgressCircle.argTypes = {
   barColor: {
     control: { type: 'color' },
     defaultValue: '#2170EF',
-    description: 'Bar color as a hex string',
+    description: 'Bar color as a hexadecimal string',
     table: { defaultValue: { summary: '#2170EF' } }
   },
 
